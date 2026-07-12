@@ -1,0 +1,72 @@
+/* PancoKuy — Deep Steel palette.
+   DEFAULT theme = LIGHT MODE (:root). Dark mode is a documented alternative,
+   applied by setting [data-theme="dark"] on <html> or any ancestor.
+   The theme-switch UI itself is NOT built here — see readme "Theming". */
+
+:root {
+  /* ---- Brand constants (sama di kedua tema) ---- */
+  --pk-primary: #1E3A5F;        /* Deep steel blue — secondary button, field terpilih, aksen data */
+  --pk-primary-hover: #27496F;
+  --pk-primary-active: #16304F;
+  --pk-accent: #F97316;         /* Oranye aksi — CTA, badge aktif, ikon penting SAJA. Bukan area luas. */
+  --pk-accent-hover: #FB8A3C;
+  --pk-accent-active: #EA6A0C;
+
+  --pk-success: #22C55E;
+  --pk-warning: #EAB308;
+  --pk-error: #EF4444;
+
+  --pk-text-on-accent: #0F172A; /* teks di atas oranye */
+  --pk-text-on-primary: #F1F5F9;/* teks di atas navy */
+
+  /* ---- LIGHT (default) ---- */
+  --pk-bg: #EEF2F7;             /* App background */
+  --pk-surface: #FFFFFF;        /* Cards, panels, inputs, modal */
+  --pk-surface-raised: #F1F5F9; /* Hover row/card, raised state */
+  --pk-border: #E2E8F0;
+  --pk-border-strong: #CBD5E1;
+  --pk-neutral: #64748B;
+
+  --pk-text: #0F172A;           /* Text Primary */
+  --pk-text-secondary: #475569; /* Text Secondary */
+  --pk-text-disabled: #94A3B8;
+
+  /* Status tint bg + teks-di-atas-tint (dipilih agar kontras di latar terang) */
+  --pk-accent-bg:  rgba(249, 115, 22, 0.12);  --pk-accent-fg:  #C2410C;
+  --pk-primary-bg: rgba(30, 58, 95, 0.10);    --pk-primary-fg: #1E3A5F;
+  --pk-success-bg: rgba(34, 197, 94, 0.14);   --pk-success-fg: #15803D;
+  --pk-warning-bg: rgba(234, 179, 8, 0.16);   --pk-warning-fg: #A16207;
+  --pk-error-bg:   rgba(239, 68, 68, 0.12);   --pk-error-fg:   #B91C1C;
+
+  --surface-overlay: rgba(15, 23, 42, 0.45);  /* dim modal overlay (light) */
+
+  /* Semantic aliases */
+  --surface-page: var(--pk-bg);
+  --surface-card: var(--pk-surface);
+  --text-body: var(--pk-text);
+  --text-muted: var(--pk-text-secondary);
+  --border-default: var(--pk-border);
+  --focus-ring: 0 0 0 3px rgba(249, 115, 22, 0.35); /* sama di kedua tema */
+}
+
+/* ---- DARK (alternatif) ---- */
+[data-theme="dark"] {
+  --pk-bg: #0F172A;
+  --pk-surface: #1E293B;
+  --pk-surface-raised: #24334A;
+  --pk-border: #334155;
+  --pk-border-strong: #475569;
+  --pk-neutral: #64748B;
+
+  --pk-text: #F1F5F9;
+  --pk-text-secondary: #94A3B8;
+  --pk-text-disabled: #64748B;
+
+  --pk-accent-bg:  rgba(249, 115, 22, 0.14);  --pk-accent-fg:  #F97316;
+  --pk-primary-bg: rgba(30, 58, 95, 0.55);    --pk-primary-fg: #9DBBE0;
+  --pk-success-bg: rgba(34, 197, 94, 0.14);   --pk-success-fg: #22C55E;
+  --pk-warning-bg: rgba(234, 179, 8, 0.14);   --pk-warning-fg: #EAB308;
+  --pk-error-bg:   rgba(239, 68, 68, 0.14);   --pk-error-fg:   #EF4444;
+
+  --surface-overlay: rgba(2, 6, 17, 0.68);
+}
