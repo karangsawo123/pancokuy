@@ -1,0 +1,16 @@
+<!-- @dsCard group="Colors" viewport="700x150" name="Background & Surface" subtitle="Dark-first: bg → surface → raised → border" -->
+<!DOCTYPE html><html><head><link rel="stylesheet" href="../styles.css">
+<style>
+.row{display:flex;gap:12px;padding:16px}
+.sw{flex:1;border-radius:var(--radius-md);border:1px solid var(--pk-border);padding:12px;height:86px;display:flex;flex-direction:column;justify-content:flex-end}
+.sw b{font:var(--text-label);color:var(--pk-text)}
+.sw span{font:var(--text-caption);color:var(--pk-text-secondary)}
+</style></head><body>
+<div class="row">
+  <div class="sw" style="background:var(--pk-bg)"><b>Background</b><span>#0F172A</span></div>
+  <div class="sw" style="background:var(--pk-surface)"><b>Surface</b><span>#1E293B</span></div>
+  <div class="sw" style="background:var(--pk-surface-raised)"><b>Raised</b><span>#24334A</span></div>
+  <div class="sw" style="background:var(--pk-border)"><b>Border</b><span>#334155</span></div>
+  <div class="sw" style="background:var(--pk-neutral)"><b>Neutral</b><span>#64748B</span></div>
+</div>
+</body></html>

@@ -1,0 +1,38 @@
+<!-- @dsCard group="Colors" viewport="700x340" name="Light ↔ Dark Mapping" subtitle="Default Light; Dark = alternatif via [data-theme=\"dark\"]" -->
+<!DOCTYPE html><html><head><link rel="stylesheet" href="../styles.css">
+<style>
+body{padding:14px 20px}
+table{width:100%;border-collapse:collapse;font:var(--text-body-sm)}
+th{text-align:left;font:var(--text-caption);letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--pk-text-secondary);padding:6px 8px;border-bottom:1px solid var(--pk-border)}
+td{padding:7px 8px;border-bottom:1px solid var(--pk-border);color:var(--pk-text)}
+.tok{color:var(--pk-text-secondary);font-family:ui-monospace,monospace;font-size:12px}
+.chip{display:inline-flex;align-items:center;gap:8px}
+.dot{width:16px;height:16px;border-radius:4px;border:1px solid var(--pk-border-strong);flex:none}
+.hex{font-family:ui-monospace,monospace;font-size:12px}
+</style></head><body>
+<table>
+<thead><tr><th>Token</th><th>Light (default)</th><th>Dark</th></tr></thead>
+<tbody>
+<tr><td class="tok">--pk-bg</td>
+  <td><span class="chip"><span class="dot" style="background:#EEF2F7"></span><span class="hex">#EEF2F7</span></span></td>
+  <td><span class="chip"><span class="dot" style="background:#0F172A"></span><span class="hex">#0F172A</span></span></td></tr>
+<tr><td class="tok">--pk-surface</td>
+  <td><span class="chip"><span class="dot" style="background:#FFFFFF"></span><span class="hex">#FFFFFF</span></span></td>
+  <td><span class="chip"><span class="dot" style="background:#1E293B"></span><span class="hex">#1E293B</span></span></td></tr>
+<tr><td class="tok">--pk-surface-raised</td>
+  <td><span class="chip"><span class="dot" style="background:#F1F5F9"></span><span class="hex">#F1F5F9</span></span></td>
+  <td><span class="chip"><span class="dot" style="background:#24334A"></span><span class="hex">#24334A</span></span></td></tr>
+<tr><td class="tok">--pk-border</td>
+  <td><span class="chip"><span class="dot" style="background:#E2E8F0"></span><span class="hex">#E2E8F0</span></span></td>
+  <td><span class="chip"><span class="dot" style="background:#334155"></span><span class="hex">#334155</span></span></td></tr>
+<tr><td class="tok">--pk-text</td>
+  <td><span class="chip"><span class="dot" style="background:#0F172A"></span><span class="hex">#0F172A</span></span></td>
+  <td><span class="chip"><span class="dot" style="background:#F1F5F9"></span><span class="hex">#F1F5F9</span></span></td></tr>
+<tr><td class="tok">--pk-text-secondary</td>
+  <td><span class="chip"><span class="dot" style="background:#475569"></span><span class="hex">#475569</span></span></td>
+  <td><span class="chip"><span class="dot" style="background:#94A3B8"></span><span class="hex">#94A3B8</span></span></td></tr>
+<tr><td class="tok">--pk-primary / --pk-accent</td>
+  <td colspan="2"><span class="chip"><span class="dot" style="background:#1E3A5F"></span><span class="hex">#1E3A5F</span> &nbsp;+&nbsp; <span class="dot" style="background:#F97316"></span><span class="hex">#F97316</span> &nbsp;— tetap di kedua tema</span></td></tr>
+</tbody>
+</table>
+</body></html>

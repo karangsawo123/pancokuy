@@ -1,0 +1,37 @@
+<!-- @dsCard group="Components" viewport="700x320" name="Notification & Modal" subtitle="Notifikasi inline/toast + dialog konfirmasi" -->
+<!DOCTYPE html><html><head>
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+</head><body style="padding:20px 24px">
+<div id="root"></div>
+<script type="text/babel">
+const { Notification, Modal, Button } = window.PancoKuyDesignSystem_c463ea;
+function Demo() {
+  const [open, setOpen] = React.useState(false);
+  return (
+    <div style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:16, alignItems:"start"}}>
+      <Notification tone="success" title="Sparing terkonfirmasi" onClose={()=>{}}>
+        Raka menerima tantanganmu — Sabtu 15.00 di Panco Garage.
+      </Notification>
+      <Notification tone="warning" title="Menunggu lawan" onClose={()=>{}}>
+        Tantanganmu belum dijawab. Coba lawan lain di Sparing Matcher.
+      </Notification>
+      <Notification tone="info" toast title="Lawan baru ditemukan" onClose={()=>{}}>
+        3 atlet cocok di kelas 78 kg dekatmu.
+      </Notification>
+      <div style={{display:"flex", alignItems:"center"}}>
+        <Button variant="secondary" onClick={()=>setOpen(true)}>Buka modal konfirmasi</Button>
+      </div>
+      <Modal open={open} title="Konfirmasi sparing" onClose={()=>setOpen(false)}
+        footer={<><Button variant="outline" onClick={()=>setOpen(false)}>Batal</Button><Button variant="primary" onClick={()=>setOpen(false)}>Konfirmasi</Button></>}>
+        Tantang <b style={{color:"var(--pk-text)"}}>Raka Wijaya</b> (78 kg, Top Roll) — Sabtu 15.00 WIB di Panco Garage Bandung?
+      </Modal>
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById("root")).render(<Demo />);
+</script>
+</body></html>

@@ -1,0 +1,41 @@
+<!-- @dsCard group="Components" viewport="700x400" name="Forms" subtitle="Input, select, textarea, checkbox + status validasi" -->
+<!DOCTYPE html><html><head>
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+</head><body style="padding:20px 24px">
+<div id="root"></div>
+<script type="text/babel">
+const { Field, Input, Textarea, Select, Checkbox } = window.PancoKuyDesignSystem_c463ea;
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <div style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:"16px 20px"}}>
+    <Field label="Nama atlet" required hint="Sesuai kartu identitas">
+      <Input placeholder="mis. Bagas Prasetyo" />
+    </Field>
+    <Field label="Kelas berat">
+      <Select defaultValue="70-78">
+        <option value="di bawah 70">Di bawah 70 kg</option>
+        <option value="70-78">70–78 kg</option>
+        <option value="di atas 78">Di atas 78 kg</option>
+      </Select>
+    </Field>
+    <Field label="Berat badan" error="Masukkan angka dalam kg, mis. 78">
+      <Input status="error" defaultValue="7x kg" />
+    </Field>
+    <Field label="Basecamp" success="Basecamp ditemukan">
+      <Input status="success" defaultValue="Panco Garage Bandung" />
+    </Field>
+    <Field label="Catatan sparing" style={{gridColumn:"1 / -1"}}>
+      <Textarea rows={2} placeholder="Ceritakan gaya mainmu — top roll, hook, atau press?" />
+    </Field>
+    <div style={{display:"flex", flexDirection:"column", gap:10, gridColumn:"1 / -1"}}>
+      <Checkbox defaultChecked label="Bersedia sparing akhir pekan" />
+      <Checkbox label="Tampilkan profilku di Sparing Matcher" />
+      <Checkbox disabled label="Kelas master (terkunci)" />
+    </div>
+  </div>
+);
+</script>
+</body></html>

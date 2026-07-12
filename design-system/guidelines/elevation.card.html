@@ -1,0 +1,15 @@
+<!-- @dsCard group="Spacing" viewport="700x180" name="Elevation" subtitle="Dark-mode: surface lebih terang + shadow lembut" -->
+<!DOCTYPE html><html><head><link rel="stylesheet" href="../styles.css">
+<style>
+.row{display:flex;gap:16px;padding:24px}
+.lvl{flex:1;height:110px;border-radius:var(--radius-lg);border:1px solid var(--pk-border);padding:12px;display:flex;flex-direction:column;justify-content:flex-end}
+.lvl b{font:var(--text-label);color:var(--pk-text)}
+.lvl span{font:var(--text-caption);color:var(--pk-text-secondary)}
+</style></head><body>
+<div class="row">
+  <div class="lvl" style="background:var(--pk-bg)"><b>0 — Flat</b><span>bg #0F172A</span></div>
+  <div class="lvl" style="background:var(--pk-surface);box-shadow:var(--elevation-1)"><b>1 — Card</b><span>surface + shadow 1</span></div>
+  <div class="lvl" style="background:var(--pk-surface-raised);box-shadow:var(--elevation-2)"><b>2 — Hover/Dropdown</b><span>raised + shadow 2</span></div>
+  <div class="lvl" style="background:var(--pk-surface-raised);box-shadow:var(--elevation-3)"><b>3 — Modal</b><span>raised + shadow 3</span></div>
+</div>
+</body></html>

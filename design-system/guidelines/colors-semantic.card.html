@@ -1,0 +1,23 @@
+<!-- @dsCard group="Colors" viewport="700x150" name="Semantic Status" subtitle="Success, warning, error + versi bg 12%" -->
+<!DOCTYPE html><html><head><link rel="stylesheet" href="../styles.css">
+<style>
+.row{display:flex;gap:12px;padding:16px}
+.cell{flex:1;display:flex;flex-direction:column;gap:8px}
+.sw{border-radius:var(--radius-md);height:52px;display:flex;align-items:center;justify-content:center;font:var(--text-label);color:#0F172A}
+.bg{border-radius:var(--radius-sm);padding:8px 12px;font:var(--text-caption);letter-spacing:var(--tracking-caps);text-transform:uppercase;text-align:center}
+</style></head><body>
+<div class="row">
+  <div class="cell">
+    <div class="sw" style="background:var(--pk-success)">Success #22C55E</div>
+    <div class="bg" style="background:var(--pk-success-bg);color:var(--pk-success-fg)">Jadwal terkonfirmasi</div>
+  </div>
+  <div class="cell">
+    <div class="sw" style="background:var(--pk-warning)">Warning #EAB308</div>
+    <div class="bg" style="background:var(--pk-warning-bg);color:var(--pk-warning-fg)">Menunggu lawan</div>
+  </div>
+  <div class="cell">
+    <div class="sw" style="background:var(--pk-error);color:#fff">Error #EF4444</div>
+    <div class="bg" style="background:var(--pk-error-bg);color:var(--pk-error-fg)">Sparing dibatalkan</div>
+  </div>
+</div>
+</body></html>
