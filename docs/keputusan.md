@@ -150,3 +150,32 @@ Row Level Security (RLS) Supabase bisa dimanfaatkan untuk kontrol akses data di 
 **Dampak.** `role` dibaca dari tabel `users` di schema `public` setelah login, bukan dari JWT
 token bawaan. Tidak ada login sosial (Google dsb.) — memang tidak ada di rancangan proposal.
 Tidak ada tabel `Account`, `Session`, atau `VerificationToken` di schema `public`.
+
+---
+
+## KP-007 — Bentuk aplikasi: web biasa dibangun sebagai PWA (bukan native app)
+
+**Tanggal:** 2026-07-14 · **Status:** Ditetapkan
+
+**Konteks.** Proposal (BAB 3.1.4) hanya mensyaratkan "berbasis web" dan "responsif", tidak
+menyebut web vs mobile app sama sekali — proposal juga belum di-ACC dosen pembimbing sehingga
+poin ini masih terbuka untuk didiskusikan. Muncul kebutuhan agar sistem tidak berhenti jadi
+sekadar syarat sidang, tapi juga benar-benar dipakai komunitas panco di lapangan, yang biasanya
+mengharapkan pengalaman seperti "app" (ikon di HP, notifikasi).
+
+**Keputusan.** Tetap dibangun sebagai **web app (Next.js, sesuai KP-001)**, bukan native app
+(React Native/Flutter), tapi dilengkapi kapabilitas **PWA (Progressive Web App)**: `manifest.json`
++ service worker sehingga bisa di-*install* ke home screen HP, berjalan full-screen tanpa chrome
+browser, mendukung push notification, dan caching dasar untuk koneksi tidak stabil.
+
+**Alasan.** Native app akan menambah scope besar (stack baru, proses rilis ke app store,
+pengujian multi-device) yang berisiko mengganggu linimasa skripsi yang dikerjakan solo, padahal
+kontribusi akademik (algoritma WP) tidak bergantung pada platform yang dipakai. PWA memberi
+sebagian besar pengalaman "app" (ikon, notifikasi, akses cepat) tanpa mengubah keputusan stack
+di KP-001 dan tanpa hambatan instalasi lewat app store — pengguna komunitas cukup buka link,
+tanpa dipaksa install juga tetap bisa.
+
+**Dampak.** Tidak ada perubahan pada stack di KP-001 (tetap Next.js + Supabase + shadcn/ui).
+Perlu ditambahkan `manifest.json`, service worker, dan ikon PWA di tahap build UI. Skenario
+push notification (misal status sparing berubah) dapat memakai Web Push API — dukungan penuh
+di Android, dukungan terbatas di iOS (Safari 16.4+).
