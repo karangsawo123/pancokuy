@@ -9,7 +9,8 @@
       "Bash(node build-preview.js)",
       "Bash(head -c 300 \"/c/Users/Lenovo/AppData/Local/Temp/claude/c--Users-Lenovo-OneDrive-Desktop-pancoKuy/9c2d82c8-b58f-4fb1-9770-e413d716f25b/scratchpad/design-preview.html\")",
       "Read(//c/Users/Lenovo/AppData/Local/Temp/claude/c--Users-Lenovo-OneDrive-Desktop-pancoKuy/9c2d82c8-b58f-4fb1-9770-e413d716f25b/scratchpad/**)",
-      "Bash(cp \"/c/Users/Lenovo/AppData/Local/Temp/claude/c--Users-Lenovo-OneDrive-Desktop-pancoKuy/9c2d82c8-b58f-4fb1-9770-e413d716f25b/scratchpad/design-preview.html\" \"/c/Users/Lenovo/OneDrive/Desktop/pancoKuy/design-system/preview.html\" && ls -la \"/c/Users/Lenovo/OneDrive/Desktop/pancoKuy/design-system/preview.html\")"
+      "Bash(cp \"/c/Users/Lenovo/AppData/Local/Temp/claude/c--Users-Lenovo-OneDrive-Desktop-pancoKuy/9c2d82c8-b58f-4fb1-9770-e413d716f25b/scratchpad/design-preview.html\" \"/c/Users/Lenovo/OneDrive/Desktop/pancoKuy/design-system/preview.html\" && ls -la \"/c/Users/Lenovo/OneDrive/Desktop/pancoKuy/design-system/preview.html\")",
+      "Bash(git commit -m ' *)"
     ],
     "additionalDirectories": [
       "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\claude\\c--Users-Lenovo-OneDrive-Desktop-pancoKuy\\9c2d82c8-b58f-4fb1-9770-e413d716f25b\\scratchpad"

@@ -10,23 +10,28 @@ yang menggantikan (dan tandai entri lama sebagai *Digantikan oleh KP-xxx*).
 
 ---
 
-## KP-001 — Tech stack: Next.js, bukan Laravel
+## KP-001 — Tech stack: Next.js + Supabase + shadcn/ui
 
-**Tanggal:** 2026-07-12 · **Status:** Ditetapkan
+**Tanggal:** 2026-07-12 (ditetapkan) · 2026-07-14 (diperbarui) · **Status:** Ditetapkan
 
 **Konteks.** Proposal tidak mengunci teknologi (BAB 3.1.4 hanya mensyaratkan "berbasis web",
-"responsif", dan "DBMS relasional"). Versi awal `CLAUDE.md` sempat merekomendasikan Laravel +
-Blade + MySQL sebagai default.
+"responsif", dan "DBMS relasional"). Stack awal sempat menggunakan Prisma ORM + PostgreSQL
+manual + Auth.js v5, namun setelah evaluasi diganti ke stack yang lebih mudah untuk pemula
+dan lebih mudah di-deploy.
 
-**Keputusan.** Stack final: **Next.js (App Router) + TypeScript + Tailwind CSS + Prisma ORM +
-PostgreSQL + Auth.js v5.** Rekomendasi Laravel dibatalkan dan dihapus dari `CLAUDE.md`.
+**Keputusan.** Stack final: **Next.js (App Router) + TypeScript + Tailwind CSS v4 +
+shadcn/ui + Supabase (PostgreSQL + Auth) + Vercel (deploy).**
 
-**Alasan.** Ditetapkan oleh peneliti. Seluruh syarat non-fungsional BAB 3.1.4 tetap terpenuhi:
-web, responsif, dan PostgreSQL adalah DBMS relasional.
+**Alasan.** Seluruh syarat non-fungsional BAB 3.1.4 tetap terpenuhi: web, responsif, dan
+Supabase menggunakan PostgreSQL yang merupakan DBMS relasional. Supabase Auth menyimpan
+tabel di schema `auth` yang terpisah dari schema `public` — tidak menambah tabel di luar
+8 tabel skema BAB 3. Deploy ke Vercel lebih sederhana: 1 repo, 1 push, tidak perlu
+mendeploy frontend dan backend secara terpisah.
 
-**Dampak.** Migrasi skema memakai `prisma migrate`. Nama tabel & kolom di database wajib tetap
-snake_case Bahasa Indonesia persis seperti BAB 3.3.3 — dipaksakan lewat `@map` / `@@map` di
-Prisma schema, karena penguji akan mencocokkan struktur DB dengan proposal.
+**Dampak.** Migrasi skema memakai Supabase Migration (SQL). Nama tabel & kolom di database
+wajib tetap snake_case Bahasa Indonesia persis seperti BAB 3.3.3 — dibuat langsung di
+Supabase schema `public` dengan nama tersebut.
+Jangan mengusulkan Laravel/PHP/MySQL/Prisma/Auth.js — keputusan ini sudah final.
 
 ---
 
@@ -123,22 +128,25 @@ pembimbing menolak, fitur ini dicabut dan status dibiarkan `pending` (entri ini 
 
 ---
 
-## KP-006 — Autentikasi: Auth.js v5 dengan Credentials provider
+## KP-006 — Autentikasi: Supabase Auth dengan email + password
 
-**Tanggal:** 2026-07-12 · **Status:** Ditetapkan
+**Tanggal:** 2026-07-12 (ditetapkan Auth.js) · 2026-07-14 (diperbarui ke Supabase Auth) · **Status:** Ditetapkan
 
 **Konteks.** Skema BAB 3.3.3 menyimpan `password_hash` di tabel `users` dan BAB 3.4.2 merancang
-form registrasi/login dengan email + kata sandi. Auth.js secara default mendorong OAuth dan
-tabel `Account`/`Session` miliknya sendiri.
+form registrasi/login dengan email + kata sandi. Stack sebelumnya memakai Auth.js v5 dengan
+Credentials provider dan JWT — namun lebih kompleks untuk pemula dan memerlukan konfigurasi
+tambahan yang tidak perlu.
 
-**Keputusan.** Pakai **Credentials provider** Auth.js v5 dengan strategi sesi **JWT**,
-memverifikasi email + password terhadap kolom `password_hash` (hash memakai bcrypt/argon2).
-**Tidak** memakai Prisma Adapter bawaan Auth.js, sehingga tidak ada tabel tambahan
-(`Account`, `Session`, `VerificationToken`) di luar skema BAB 3.
+**Keputusan.** Pakai **Supabase Auth** dengan email + password. Tabel autentikasi Supabase
+berada di schema `auth` (terpisah dari schema `public`), sehingga **tidak menambah satu pun
+tabel di luar 8 tabel skema BAB 3**. Data `role` (`anggota`/`admin`) tetap disimpan di kolom
+`role` di tabel `users` di schema `public`, disinkronkan dengan `auth.users` via
+`user_id` foreign key.
 
-**Alasan.** Skema DB sudah ACC dan hanya berisi 8 tabel. Menambah tabel bawaan Auth.js akan
-membuat struktur DB tidak cocok dengan BAB 3.3 saat diperiksa penguji. Sesi JWT membuat tabel
-`Session` tidak diperlukan.
+**Alasan.** Supabase Auth terintegrasi langsung dengan database Supabase, lebih mudah dikonfigurasi
+dan di-deploy. Tidak ada tabel tambahan di schema `public` yang bisa membingungkan penguji.
+Row Level Security (RLS) Supabase bisa dimanfaatkan untuk kontrol akses data di level DB.
 
-**Dampak.** `role` (`anggota`/`admin`) dibawa di dalam JWT/session callback untuk otorisasi.
-Tidak ada login sosial (Google dsb.) — memang tidak ada di rancangan proposal.
+**Dampak.** `role` dibaca dari tabel `users` di schema `public` setelah login, bukan dari JWT
+token bawaan. Tidak ada login sosial (Google dsb.) — memang tidak ada di rancangan proposal.
+Tidak ada tabel `Account`, `Session`, atau `VerificationToken` di schema `public`.

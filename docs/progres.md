@@ -3,11 +3,9 @@
 > **Baca file ini di awal setiap sesi coding.** Ini satu-satunya sumber status "sudah sampai
 > mana". Perbarui setiap kali menyelesaikan atau memulai sebuah tahap.
 
-**Terakhir diperbarui:** 2026-07-13
-**Fase sekarang:** Tahap 1 — Setup Next.js 🟡 sebagian (Next.js + Tailwind + design system jalan;
-Prisma schema belum)
-**Berikutnya:** Lanjutkan Tahap 1 — `prisma/schema.prisma` 8 tabel + migration awal + seed
-`wp_criteria` & `wilayah_kota_berbatasan`
+**Terakhir diperbarui:** 2026-07-14
+**Fase sekarang:** Tahap 1 — Setup 🟡 sebagian (Next.js + Tailwind jalan; Supabase project + schema 8 tabel belum)
+**Berikutnya:** Lanjutkan Tahap 1 — buat Supabase project, schema 8 tabel di `public`, migration SQL, seed `wp_criteria` & `wilayah_kota_berbatasan`
 
 ---
 
@@ -35,13 +33,12 @@ Urutan mengikuti `CLAUDE.md` §8. Status: ⬜ belum · 🟡 sedang dikerjakan ·
 ## Catatan & hambatan
 
 - **Tahap 1 (bagian Next.js) sudah jalan (2026-07-13):** project Next.js App Router + TypeScript +
-  Tailwind v4 sudah di-bootstrap di root repo. Design system dari Claude Design (`design-system/`)
-  sudah diporting ke kode aplikasi: token warna/tipografi/spacing/motion di `src/styles/pancokuy/`
-  + `src/app/globals.css`, logo di `public/logo/`, 8 komponen dasar (Button, Badge, Card, Modal,
-  Notification, Checkbox, Field, Input/Textarea/Select) di `src/components/ui/*.tsx`. Halaman
-  `/` sekarang menampilkan showcase komponen ini (bukan fitur produk — itu Tahap 3+).
-  `npm run build` dan `npm run dev` sudah diverifikasi jalan tanpa error.
-- **Prisma schema (bagian lain Tahap 1) belum dikerjakan** — `prisma/schema.prisma`, migration
+  Tailwind v4 sudah di-bootstrap di root repo. `npm run dev` sudah diverifikasi jalan tanpa error.
+- **Tech stack diperbarui (2026-07-14):** Stack diganti dari Prisma + Auth.js v5 ke
+  **Supabase (PostgreSQL + Auth) + shadcn/ui**. Skills baru sudah diinstall:
+  `supabase`, `supabase-postgres-best-practices`, `shadcn`, `vercel-react-best-practices`,
+  `nextjs-supabase-auth`, `nextjs-app-router-patterns`. Lihat KP-001 & KP-006 di `docs/keputusan.md`.
+- **Supabase schema 8 tabel belum dikerjakan** — DDL SQL untuk 8 tabel di schema `public`, migration
   awal, dan seed `wp_criteria`/`wilayah_kota_berbatasan` masih harus dibuat sebelum Tahap 1 resmi
   selesai.
 - **KP-005 belum dikonfirmasi ke dosen pembimbing.** Fitur inbox terima/tolak sparing adalah

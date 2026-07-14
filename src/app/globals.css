@@ -1,31 +1,8 @@
-@import "../styles/pancokuy/fonts.css";
-@import "tailwindcss";
-@import "../styles/pancokuy/colors.css";
-@import "../styles/pancokuy/typography.css";
-@import "../styles/pancokuy/spacing.css";
-@import "../styles/pancokuy/elevation.css";
-@import "../styles/pancokuy/motion.css";
-@import "../styles/pancokuy/base.css";
-
-@theme inline {
-  --color-bg: var(--pk-bg);
-  --color-surface: var(--pk-surface);
-  --color-surface-raised: var(--pk-surface-raised);
-  --color-border: var(--pk-border);
-  --color-border-strong: var(--pk-border-strong);
-  --color-text: var(--pk-text);
-  --color-text-secondary: var(--pk-text-secondary);
-  --color-primary: var(--pk-primary);
-  --color-accent: var(--pk-accent);
-  --color-success: var(--pk-success);
-  --color-warning: var(--pk-warning);
-  --color-error: var(--pk-error);
-
-  --font-heading: var(--font-heading);
-  --font-body: var(--font-body);
-
-  --radius-sm: var(--radius-sm);
-  --radius-md: var(--radius-md);
-  --radius-lg: var(--radius-lg);
-  --radius-xl: var(--radius-xl);
+/* PancoKuy — global styles akan dibangun dari awal */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }

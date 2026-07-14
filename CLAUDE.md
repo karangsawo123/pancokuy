@@ -135,30 +135,33 @@ sparing_requests
 ## 6. Tech Stack — SUDAH FIX, JANGAN DIUBAH
 
 - **Framework**: Next.js (App Router) + TypeScript
-- **Styling**: Tailwind CSS
-- **ORM**: Prisma
-- **Database**: PostgreSQL
-- **Auth**: Auth.js v5 — Credentials provider (email + password), sesi JWT, TANPA Prisma
-  Adapter. Alasan: adapter akan menambah tabel `Account`/`Session`/`VerificationToken` di luar
-  8 tabel skema BAB 3 yang sudah ACC. Lihat KP-006 di `docs/keputusan.md`.
+- **Styling**: Tailwind CSS v4
+- **Komponen UI**: shadcn/ui (copy-paste components berbasis Radix UI)
+- **Database**: PostgreSQL via **Supabase** (managed cloud PostgreSQL)
+- **Auth**: **Supabase Auth** — email + password, sesi dikelola Supabase.
+  Tabel auth Supabase ada di schema `auth` yang terpisah dari schema `public`,
+  sehingga tidak menabrak 8 tabel skema BAB 3. Lihat KP-006 di `docs/keputusan.md`.
+- **Query DB**: Supabase client (`@supabase/ssr` + `@supabase/supabase-js`) + generated types
+- **Deploy**: Vercel (frontend + API Route Handlers) — 1 repo, 1 push, langsung jalan
 
-Jangan mengusulkan atau memakai Laravel/PHP/MySQL — keputusan ini sudah final (KP-001).
+Jangan mengusulkan atau memakai Laravel/PHP/MySQL/Prisma/Auth.js — keputusan ini sudah final (KP-001, KP-006).
 
 ## 7. Konvensi Kode
-- Nama tabel & kolom **di database** pakai snake_case Bahasa Indonesia PERSIS seperti skema
+- Nama tabel \& kolom **di database** pakai snake_case Bahasa Indonesia PERSIS seperti skema
   di §5 (dosen/penguji akan cek kesesuaian dengan BAB 3 proposal — jangan diterjemahkan ke
-  Inggris). Di Prisma, gunakan `@map` / `@@map` untuk memaksa nama fisik tersebut, walaupun
-  nama field di TypeScript boleh mengikuti idiom Prisma.
-- Setiap perubahan schema WAJIB lewat `prisma migrate dev` (ada file migration-nya).
-  JANGAN pernah mengubah struktur DB manual lewat SQL client.
-- Setiap fitur baru: schema/migration → query layer → route/server action → UI
+  Inggris). Di Supabase, buat tabel di schema `public` sesuai nama tersebut persis.
+- Setiap perubahan schema dilakukan lewat **Supabase Dashboard → SQL Editor** atau
+  **Supabase CLI** (`supabase migration new`). Ada file migration SQL-nya — jangan ubah
+  struktur DB tanpa migration.
+- Setiap fitur baru: schema/migration SQL → Supabase type generation → query layer → route/server action → UI
 - Logic algoritma WP ditulis sebagai **modul murni** di `src/lib/wp/` — fungsi konversi skor
-  dan perhitungan S/V menerima data biasa sebagai argumen dan TIDAK boleh menyentuh Prisma
-  atau `session`. Pengambilan data dari DB dilakukan di lapisan pemanggil. Ini syarat supaya
-  perhitungan bisa diuji langsung dengan data dummy untuk BAB 3.5.2 (uji kesesuaian manual
-  vs sistem).
+  dan perhitungan S/V menerima data biasa sebagai argumen dan TIDAK boleh menyentuh Supabase
+  client atau session. Pengambilan data dari DB dilakukan di lapisan pemanggil. Ini syarat
+  supaya perhitungan bisa diuji langsung dengan data dummy untuk BAB 3.5.2.
 - Perhitungan WP wajib memakai `bobot_normalisasi` dari tabel `wp_criteria` (dari DB),
   bukan angka yang di-hardcode di kode.
+- Gunakan `@supabase/ssr` untuk server-side queries (Server Components, Route Handlers).
+  Gunakan `@supabase/supabase-js` untuk client-side (jika diperlukan).
 
 ## 8. Urutan Pembangunan yang Disarankan
 Status terkini tiap tahap ada di `docs/progres.md` — perbarui file itu setiap kali selesai.

@@ -3,10 +3,14 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "PancoKuy",
-  description: "Platform digital komunitas arm wrestling (panco) Indonesia",
+  description: "Platform komunitas arm wrestling berbasis web",
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="id">
       <body>{children}</body>
