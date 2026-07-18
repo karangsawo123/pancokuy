@@ -2,6 +2,7 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
+import { getProfilByUserId, isProfilLengkap } from "@/lib/profil/queries";
 
 export type AuthActionState = { error: string | null };
 
@@ -60,10 +61,17 @@ export async function loginAction(
   }
 
   const supabase = await createClient();
-  const { error } = await supabase.auth.signInWithPassword({ email, password });
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
   if (error) {
     return { error: mapAuthError(error.message) };
+  }
+
+  if (data.user) {
+    const { profil, basecampAktifIds } = await getProfilByUserId(supabase, data.user.id);
+    if (!isProfilLengkap(profil, basecampAktifIds)) {
+      redirect("/profil");
+    }
   }
 
   redirect("/");
