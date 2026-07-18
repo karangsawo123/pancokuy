@@ -32,6 +32,24 @@ Urutan mengikuti `CLAUDE.md` §8. Status: ⬜ belum · 🟡 sedang dikerjakan ·
 
 ## Catatan & hambatan
 
+- **Tahap 5 — Form profil atlet selesai + perbaikan bug pasca pengujian (2026-07-18).**
+  File baru: `src/lib/profil/queries.ts` (`getProfilByUserId`, `isProfilLengkap`),
+  `src/lib/profil/actions.ts` (`saveProfilAction`), `src/app/profil/page.tsx`,
+  `src/app/profil/form.tsx`. `src/app/page.tsx` diperbarui: tambah link "Profil Saya"
+  (khusus user login). `src/lib/auth/actions.ts` diperbarui: `loginAction` redirect ke
+  `/profil` jika profil belum lengkap.
+  - **Perbaikan yang dilakukan selama pengujian:**
+    - **Redirect pasca registrasi:** `registerAction` sebelumnya selalu redirect ke `/`,
+      padahal profil user baru pasti belum lengkap. Diperbaiki: redirect ke `/profil`
+      agar user baru langsung diarahkan ke form profil dengan banner "Profil belum lengkap".
+    - **Invalidasi cache server setelah simpan profil:** Banner status (kuning/hijau) tidak
+      update tanpa refresh manual karena cache rute `/profil` belum di-invalidasi.
+      Diperbaiki: `saveProfilAction` sekarang memanggil `revalidatePath("/profil")` agar
+      komponen server me-render ulang data terbaru setiap kali form berhasil di-submit.
+  - **Catatan testing:** Environment cloud memblokir koneksi ke Supabase via network policy
+    (egress proxy 403). Skenario yang bisa diverifikasi otomatis terbatas pada routing
+    Next.js (non-login redirect ke /login — PASS). Pengujian end-to-end penuh (register,
+    simpan profil, login kembali) perlu dilakukan di mesin lokal dengan `npm run dev`.
 - **Tahap 4 — CRUD Events (admin) + halaman jadwal/event selesai (2026-07-17).** Tabel
   `events` dan RLS-nya sudah ada sejak migration Tahap 1 (select publik untuk
   anon/authenticated, write khusus admin via `is_admin()`), jadi tahap ini juga murni
