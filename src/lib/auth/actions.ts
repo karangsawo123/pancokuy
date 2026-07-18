@@ -46,7 +46,7 @@ export async function registerAction(
     return { error: "Registrasi gagal menyimpan profil pengguna." };
   }
 
-  redirect("/");
+  redirect("/profil");
 }
 
 export async function loginAction(
