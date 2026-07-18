@@ -3,9 +3,9 @@
 > **Baca file ini di awal setiap sesi coding.** Ini satu-satunya sumber status "sudah sampai
 > mana". Perbarui setiap kali menyelesaikan atau memulai sebuah tahap.
 
-**Terakhir diperbarui:** 2026-07-17
-**Fase sekarang:** Tahap 4 — CRUD Events (admin) + halaman jadwal/event ✅ selesai (teruji end-to-end)
-**Berikutnya:** Mulai Tahap 5 — Form profil atlet (6 kriteria WP + basecamp aktif + style dominan) + validasi kelengkapan
+**Terakhir diperbarui:** 2026-07-18
+**Fase sekarang:** Tahap 5 — Form profil atlet ✅ selesai
+**Berikutnya:** Tahap 6 — Direktori anggota + Challenge Mode (filter + ajukan sparing)
 
 ---
 
@@ -20,7 +20,7 @@ Urutan mengikuti `CLAUDE.md` §8. Status: ⬜ belum · 🟡 sedang dikerjakan ·
 | 2 | Auth (register/login) Supabase Auth + role `anggota`/`admin` (lihat KP-006, KP-008) | ✅ |
 | 3 | CRUD Basecamp (admin) + halaman direktori basecamp publik + CTA WhatsApp | ✅ |
 | 4 | CRUD Events (admin) + halaman jadwal/event | ✅ |
-| 5 | Form profil atlet (6 kriteria WP + basecamp aktif + style dominan) + validasi kelengkapan | ⬜ |
+| 5 | Form profil atlet (6 kriteria WP + basecamp aktif + style dominan) + validasi kelengkapan | ✅ |
 | 6 | Direktori anggota + Challenge Mode (filter + ajukan sparing) | ⬜ |
 | 7 | `WPMatcher` — logic murni WP, diuji dengan data dummy sebelum menyentuh UI | ⬜ |
 | 8 | Halaman Sparing Matcher + ajukan sparing | ⬜ |
@@ -32,6 +32,24 @@ Urutan mengikuti `CLAUDE.md` §8. Status: ⬜ belum · 🟡 sedang dikerjakan ·
 
 ## Catatan & hambatan
 
+- **Tahap 5 — Form profil atlet selesai (2026-07-18).** Tidak ada migration baru —
+  tabel `profil_atlet` dan `profil_atlet_basecamp` sudah ada sejak Tahap 1.
+  - File baru: `src/lib/profil/queries.ts` (`getProfilByUserId` ambil profil +
+    basecamp aktif per user; `isProfilLengkap` cek 6 kriteria WP terisi + minimal
+    1 basecamp aktif, sesuai KP-002), `src/lib/profil/actions.ts`
+    (`saveProfilAction` — upsert `profil_atlet` via `onConflict: 'user_id'`, lalu
+    reset semua pivot `profil_atlet_basecamp` ke `is_aktif=false`, kemudian upsert
+    basecamp terpilih ke `is_aktif=true`), `src/app/profil/page.tsx` (halaman
+    `/profil`, guard login, banner status lengkap/belum), `src/app/profil/form.tsx`
+    (client form: berat_badan, bulan+tahun mulai latihan, frekuensi, tangan_sparing,
+    level_kemampuan, style_dominan opsional, checkbox basecamp aktif).
+  - `src/lib/auth/actions.ts` diperbarui: `loginAction` cek `isProfilLengkap`
+    setelah sign-in sukses, redirect ke `/profil` jika belum lengkap, ke `/` jika
+    sudah — menyambungkan catatan yang ditunda dari Tahap 2.
+  - `src/app/page.tsx` diperbarui: tambah link "Profil Saya" untuk user yang sudah
+    login.
+  - **Belum diuji end-to-end** (tidak ada dev server aktif di sesi ini). Perlu
+    diverifikasi di sesi berikutnya sebelum atau saat Tahap 6 dimulai.
 - **Tahap 4 — CRUD Events (admin) + halaman jadwal/event selesai (2026-07-17).** Tabel
   `events` dan RLS-nya sudah ada sejak migration Tahap 1 (select publik untuk
   anon/authenticated, write khusus admin via `is_admin()`), jadi tahap ini juga murni
