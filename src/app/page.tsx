@@ -35,6 +35,9 @@ export default async function Home() {
       {user ? (
         <div className="flex flex-col gap-3">
           <p>Halo, {nama ?? user.email}!</p>
+          <Link href="/profil" className="rounded border px-3 py-2 text-center">
+            Profil Saya
+          </Link>
           {role === "admin" && (
             <>
               <Link href="/admin/basecamp" className="rounded border px-3 py-2 text-center">
